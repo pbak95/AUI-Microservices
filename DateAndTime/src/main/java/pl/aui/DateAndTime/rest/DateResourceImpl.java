@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateResourceImpl implements DateResource {
 
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss");
 
     private static final String APP_NAME = "DateAndTime";
 
