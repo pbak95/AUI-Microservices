@@ -1,7 +1,7 @@
 pipeline {
   agent {
     dockerfile {
-      filename 'src/test/docker/Dockerfile'
+      filename 'DateAndTime/src/test/docker/Dockerfile'
     }
   }
   stages {
