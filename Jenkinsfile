@@ -7,7 +7,11 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh 'mvn clean verify'
+        sh '''ls -al
+        cd /usr/src/app/DateAndTime
+        ls -al
+        mvn clean verify
+        '''
       }
     }
     stage('deploy') {
