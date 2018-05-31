@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh '''cd /usr/src/app
+        sh '''
         mvn clean verify
         '''
       }
