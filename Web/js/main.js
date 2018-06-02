@@ -39,38 +39,43 @@ const app = new Vue({
     },
     methods: {
         md5Hash(hasherInput) {
-            fetch("http://demo-1189111479.eu-central-1.elb.amazonaws.com/md5/" + hasherInput, {
+            fetch("http://dp9grg7o4cfej.cloudfront.net/md5/" + hasherInput, {
                 headers: {
                     "Content-Type": "text/plain",
                 },
             })
                 .then((response) => {
-                    this.hasher.hasherResponse = response;
+					var temp = Promise.resolve(response.text());
+					var promiseB = temp.then(result => {
+						console.log(result);
+						this.hasher.hasherResponse = result;
+						return result;
+					});
                     this.hasher.responsePresent = true;
                     console.log(response);
                 })
         },
         getUsers() {
-            fetch("http://demo-1189111479.eu-central-1.elb.amazonaws.com/users/", {
+            fetch("http://dp9grg7o4cfej.cloudfront.net/users", {
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "text/plain",
                 },
             })
                 .then(response => response.json())
                 .then((data) => {
-                    this.users = data;
+                    this.users = data.msg;
                     console.log(data);
                 })
         },
         getUserDetail(userIdInput) {
-            fetch("http://demo-1189111479.eu-central-1.elb.amazonaws.com/users/" + userIdInput, {
+            fetch("http://dp9grg7o4cfej.cloudfront.net/users/" + userIdInput, {
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "text/plain",
                 },
             })
                 .then(response => response.json())
                 .then((data) => {
-                    this.userObj.userDetails = data;
+                    this.userObj.userDetails = data.msg;
                     this.userObj.responsePresent = true;
                     console.log(data);
                 });
@@ -78,7 +83,7 @@ const app = new Vue({
         }
     },
     mounted() {
-        fetch("http://demo-1189111479.eu-central-1.elb.amazonaws.com/date")
+        fetch("http://dp9grg7o4cfej.cloudfront.net/date")
             .then(response => response.json())
             .then((data) => {
                 this.dateObj = data;
