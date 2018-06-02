@@ -2,9 +2,13 @@
 // 3S3 PART
 var albumBucketName = 'zip-keeper-aui-project';
 var bucketRegion = 'eu-central-1';
+var IdentityPoolId = '';
 
 AWS.config.update({
-    region: bucketRegion
+    region: bucketRegion,
+    credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: IdentityPoolId
+    })
 });
 
 var s3 = new AWS.S3({
@@ -13,6 +17,16 @@ var s3 = new AWS.S3({
 });
 
 function listAlbums() {
+
+    AWS.config.credentials.get(function(err) {
+        if (err) {
+            console.log("Error: " + err);
+            return;
+        }
+    });
+
+    console.log("Cognito Identity Id: " + AWS.config.credentials.identityId);
+
     s3.listObjects({Delimiter: '/'}, function(err, data) {
         if (err) {
             return alert('There was an error listing your albums: ' + err.message);
@@ -119,7 +133,7 @@ function viewAlbum(albumName) {
             '<div>',
             getHtml(photos),
             '</div>',
-            '<input id="photoupload" type="file" accept="image/*">',
+            '<input id="photoupload" type="file">',
             '<button id="addphoto" onclick="addPhoto(\'' + albumName +'\')">',
             'Add Photo',
             '</button>',

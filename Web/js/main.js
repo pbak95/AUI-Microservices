@@ -124,18 +124,6 @@ const app = new Vue({
                 </li>
             </div>
         </div>
-        <div class="footer-container">    
-             <h4>Authors:</h4>
-             <div>
-                 <span>Patryk Bąk</span>
-                 <span>Michal Krzemiński</span>
-                 <span>Marek Pelka</span>
-                 <span>Grzegorz Przytuła</span>
-             </div>
-            <!--<div v-for="user in users">-->
-                <!--<span>{{user.name}}</span>-->
-            <!--</div>-->
-        </div>
     </div>
     `,
 });
